@@ -1,0 +1,44 @@
+﻿<h1>Api Hospitales Clientes</h1>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $("#botonhospitales").click(function() {
+                let url = "https://apicorehospitalesivm-b4g6h9cjbqasefbr.italynorth-01.azurewebsites.net/";
+                let request = "api/Hospitales";
+                $.ajax({
+                    url: url + request,
+                    method: "GET",
+                    success: function(data) {
+                        console.log("Leyendo...");
+                        var html = "";
+                        $.each(data, function(index, hospital) {
+                            html += "<tr>";
+                            html += "<td>" + hospital.nombre + "</td>";
+                            html += "<td>" + hospital.direccion + "</td>";
+                            html += "<td>" + hospital.telefono + "</td>";
+                            html += "<td>" + hospital.camas + "</td>";
+                            html += "</tr>";
+                        })
+                        $("#tablahospital tbody").html(html);
+                    }
+                })
+            })
+        })
+    </script>
+}
+
+<button id="botonhospitales" class="btn btn-dark">
+    Load Hospitales
+</button>
+<table class="table table-dark" id="tablahospital">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Camas</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
